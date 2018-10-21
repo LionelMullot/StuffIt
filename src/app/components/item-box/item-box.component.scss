@@ -1,0 +1,81 @@
+@import './src/styles/utils.scss';
+
+:host {
+  width: 340px;
+  height: 340px;
+}
+
+.item {
+  position: relative;
+  
+  display: flex;
+  align-items: flex-end;
+
+  height: 100%;
+  width: 100%;
+
+  &-content {
+    position: relative;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 280px;
+    height: 280px;
+
+    background: $grey;
+
+    &-title {
+      color: $light-black;
+    }
+
+    &-number {
+      position: absolute;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 50px;
+      height: 50px;
+
+      background: $light-black;
+      color: $white;
+
+      &.serial {
+        top: 0; 
+        left: 0;
+      }
+
+      &.child {
+        bottom: 0; 
+        right: 0;
+      }
+    }
+  }
+
+  &-category {
+    position: absolute;
+    top: 0; 
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 135px;
+    height: 135px;
+    
+    background: $pink;
+    border: 3px solid $light-black;
+    border-radius: 100%;
+    
+    &-title {
+      padding: 0 15px;
+      color: $white;
+      text-align: center;
+      font-variant: small-caps;
+    }
+  }
+}

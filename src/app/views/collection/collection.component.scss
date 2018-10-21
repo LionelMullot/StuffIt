@@ -1,0 +1,33 @@
+@import './src/styles/utils.scss';
+
+:host {
+
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background: $light-black;
+    height: 350px;
+    color: $white;
+
+    &-nav {
+      display: flex;
+
+      &-item {
+        display: flex;
+      }
+    }
+  }
+
+  &-main {
+    align-self: center;
+    width: 75%;
+  }
+}

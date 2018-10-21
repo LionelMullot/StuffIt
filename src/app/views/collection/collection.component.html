@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="content-header">
+    <h1 class="content-header-title">Jeux de société</h1>
+    <ul class="content-header-nav">
+      <li class="content-header-nav-item" *ngFor="let path of navPath; let i = index">
+        <a class="content-header-nav-item-link">{{path}}</a>
+        <p class="content-header-nav-item-separator" *ngIf="i !== (navPath.length - 1)"> > </p>
+      </li>
+    </ul>
+  </div>
+  <div class="content-main">
+    <app-item-box-list></app-item-box-list>
+  </div>
+</div>
