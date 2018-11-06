@@ -1,8 +1,11 @@
 @import './src/styles/utils.scss';
 
+$category-size:135px;
 :host {
-  width: 340px;
-  height: 340px;
+  width: 280px;
+  height: 280px;
+  margin-right: $category-size / 2; 
+  margin-top: $category-size / 2; 
 }
 
 .item {
@@ -24,10 +27,21 @@
     width: 280px;
     height: 280px;
 
+    border: 6px solid $white;
+    box-sizing: border-box;
+
     background: $grey;
 
     &-title {
       color: $light-black;
+      font-size: 30px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      /* autoprefixer: ignore next */
+      -webkit-box-orient: vertical;
+      padding: 0 22px;
+      text-align: center;
     }
 
     &-number {
@@ -57,15 +71,15 @@
 
   &-category {
     position: absolute;
-    top: 0; 
-    right: 0;
+    top: -$category-size / 2; 
+    right: -$category-size / 2;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 135px;
-    height: 135px;
+    width: $category-size;
+    height: $category-size;
     
     background: $pink;
     border: 3px solid $light-black;
@@ -75,7 +89,6 @@
       padding: 0 15px;
       color: $white;
       text-align: center;
-      font-variant: small-caps;
     }
   }
 }
