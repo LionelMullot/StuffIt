@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CollectionComponent implements OnInit {
 
-  navPath: string[] = ['Marine & Lionel', 'collections', 'jeux de société'];
+  navPath: string[] = ['Marine & Lionel', 'Collections', 'Jeux de société'];
   constructor() { }
 
   ngOnInit() {
