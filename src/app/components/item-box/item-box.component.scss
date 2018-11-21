@@ -6,13 +6,12 @@ $category-size:100px;
   height: 210px;
   margin-right: $category-size / 2 + 20px; 
   margin-top: $category-size / 2; 
+  
+  display: inline-block;
 }
 
 .item {
   position: relative;
-  
-  display: flex;
-  align-items: flex-end;
 
   height: 100%;
   width: 100%;
