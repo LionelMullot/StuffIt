@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stuff-it';
+  
+  navPath: string[] = ['Marine & Lionel', 'Collections', 'Jeux de société'];
 }
