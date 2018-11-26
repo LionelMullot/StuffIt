@@ -1,9 +1,10 @@
 <div class="content">
   <div class="content-header">
     <div class="content-header-menu">
-      <img class="content-header-menu-logo" src="./assets/logo87x87.png"/>
+      <a routerLink="/collection"><img class="content-header-menu-logo" src="./assets/logo87x87.png"/></a>
       <div class="content-header-menu-list">
-          <a class="content-header-menu-list-item">Marine & Lionel</a>
+        <a routerLink="/addItem" class="content-header-menu-list-item">Ajout</a>
+        <a routerLink="/collection" class="content-header-menu-list-item">Marine & Lionel</a>
       </div>
     </div>
     <h1 class="content-header-title">Jeux de société</h1>
@@ -15,6 +16,6 @@
     </ul>
   </div>
   <div class="content-main">
-    <app-add-item></app-add-item>
+    <router-outlet></router-outlet>
   </div>
 </div>

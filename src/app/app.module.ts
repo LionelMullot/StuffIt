@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { ItemBoxComponent } from './components/item-box/item-box.component';
@@ -13,6 +14,7 @@ import { AddItemComponent } from './views/add-item/add-item.component';
 import { environment } from 'src/environments/environment';
 import { ItemCategoryBoxComponent } from './components/item-category-box/item-category-box.component';
 import { ChoicePopupComponent } from './components/choice-popup/choice-popup.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ChoicePopupComponent } from './components/choice-popup/choice-popup.com
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -28,6 +28,16 @@
       }
       &-list {
         text-align: right;
+        &-item {
+          margin-left: 15px;
+          color: $white;
+          &:hover {
+            color: $pink;
+          }
+          &:visited {
+            color: $white;
+          }
+        }
       }
     }
 
