@@ -1,0 +1,14 @@
+<div class="item" [ngClass]="{'empty':!currentCategory}">
+  <div class="item-content">
+    <div class="item-content-title" *ngIf="currentCategory">
+      <p>{{currentCategory.name}}</p>
+    </div>
+    <div class="item-content-add" [ngClass]="{'hide':currentCategory}">
+      <div class="item-content-add-vertical"></div>
+      <div class="item-content-add-horizontal"></div>
+    </div>
+  </div>
+  <div class="item-category" *ngIf="parentCategory">
+    <p class="item-category-title">{{parentCategory.name}}</p>
+  </div>
+</div>

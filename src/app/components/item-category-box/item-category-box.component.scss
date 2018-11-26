@@ -1,0 +1,39 @@
+@import './src/styles/utils.scss';
+
+$plus-thickness: 12px; 
+$plus-width: 70px; 
+
+.item {
+  &-content {
+    &-add {
+      &-vertical {
+        position: absolute;
+        background: $black;
+        width: $plus-thickness;
+        height: $plus-width;
+        top: calc(50% - #{$plus-width} / 2);
+        left: calc(50% - #{$plus-thickness} / 2);
+        border-radius: 4px;
+      }
+      &-horizontal {
+        position: absolute;
+        background: $black;
+        width: $plus-width;
+        height: $plus-thickness;
+        left: calc(50% - #{$plus-width} / 2);
+        top: calc(50% - #{$plus-thickness} / 2);
+        border-radius: 4px;
+      }
+    }
+  }
+  &.empty {
+    opacity: 0.7;
+    transition: opacity ease-out 0.3s;
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  &.empty &-content {
+    border: 4px dashed $white;
+  }
+}
