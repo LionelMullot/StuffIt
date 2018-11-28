@@ -3,6 +3,7 @@ import { AppDataService } from './../../services/app-data.service';
 import { ItemCategoryBoxComponent } from 'src/app/components/item-category-box/item-category-box.component';
 import { Collectionnable } from 'src/app/models/collectionnable';
 import { Category } from 'src/app/models/category';
+import { AppTitleService } from 'src/app/services/app-title-service.service';
 
 @Component({
   selector: 'app-add-item',
@@ -30,10 +31,13 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   constructor(
     public appData: AppDataService, 
     private cdRef: ChangeDetectorRef,
-    private componentFactoryResolver: ComponentFactoryResolver) { 
+    private componentFactoryResolver: ComponentFactoryResolver,    
+    private titleService: AppTitleService) { 
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.titleService.setTitle("Ajoutes un truc !");
+  }
 
   ngAfterViewInit() {
     this.createNewCategoryBox(null);

@@ -6,8 +6,19 @@ import { CollectionComponent } from './views/collection/collection.component';
 
 
 const routes: Routes = [
-  { path: 'addItem', component: AddItemComponent },
-  { path: 'collection', component: CollectionComponent }
+  {
+    path: '',
+    redirectTo: '/collection',
+    pathMatch: 'full'
+  },
+  { 
+    path: 'addItem',
+    component: AddItemComponent 
+  },
+  { 
+    path: 'collection',
+    component: CollectionComponent 
+  }
 ];
 
 @NgModule({
