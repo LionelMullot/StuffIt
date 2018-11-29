@@ -23,14 +23,25 @@ export class Collection {
   /**
    * Calculate number of collectionnable item inside a collection
    * @param rawJson Raw data returned by the BE
+   * @param isChild 
    */
   protected calculateChildNumber(rawJson){
+    let keys = Object.keys(rawJson);
+    let hasChild = keys.includes("child");
     Object.keys(rawJson).forEach(childId => {
       if(childId === "child") {
         this.calculateChildNumber(rawJson.child);
       } else {
-        let child = rawJson[childId];         
-        this.childNumber += Object.keys(child).length;
+        let child = rawJson[childId];
+        if(child.name || child.number) {
+          // Final element, so just +1
+          ++this.childNumber;
+        } else {
+          this.childNumber += Object.keys(rawJson[childId]).length
+          if (hasChild) {
+            --this.childNumber;
+          }
+        }
       }
     });
   }
