@@ -37,6 +37,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle("Ajoutes un truc !");
+    this.titleService.setNavPath([]);
   }
 
   ngAfterViewInit() {

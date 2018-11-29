@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Path } from '../models/path';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AppTitleService {
 
   private titleChange = new BehaviorSubject<string>("Stuff It !");
+  private navPathChange = new BehaviorSubject<Path[]>([]);
 
   constructor() { }
 
@@ -16,5 +18,13 @@ export class AppTitleService {
 
   getTitle(): BehaviorSubject<string> {
     return this.titleChange;
+  }
+
+  setNavPath(path: Path[]) {
+    this.navPathChange.next(path);
+  }
+
+  getNavPath(): BehaviorSubject<Path[]> {
+    return this.navPathChange;
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AppTitleService } from './services/app-title-service.service';
+import { Path } from './models/path';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { AppTitleService } from './services/app-title-service.service';
 export class AppComponent {
   private pageTitle = 'Stuff It !';
   
-  navPath: string[] = ['Marine & Lionel', 'Collections', 'Jeux de société'];
+  navPath: Path[] = [];
 
   constructor(
     private titleService: AppTitleService
@@ -19,6 +20,13 @@ export class AppComponent {
   ngOnInit() { 
     this.titleService.getTitle().subscribe((title) => {
       this.pageTitle = title;
+    })
+    this.titleService.getNavPath().subscribe((navPath) => {
+      if (navPath.length > 1) {
+        this.navPath = navPath;
+      } else {
+        this.navPath = [];
+      }
     })
   }
 }

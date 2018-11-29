@@ -10,7 +10,7 @@
     <h1 class="content-header-title">{{pageTitle}}</h1>
     <ul class="content-header-nav">
       <li class="content-header-nav-item" *ngFor="let path of navPath; let i = index">
-        <a class="content-header-nav-item-link">{{path}}</a>
+        <a [routerLink]="path.path" [queryParams]="path.queryParams" class="content-header-nav-item-link">{{path.name}}</a>
         <p class="content-header-nav-item-separator" *ngIf="i !== (navPath.length - 1)"> > </p>
       </li>
     </ul>

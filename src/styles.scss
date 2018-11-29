@@ -9,6 +9,9 @@ a {
   &:hover {
     cursor: pointer;
   }
+  &:visited {
+    color: $white;
+  }
 }
 
 ::-webkit-scrollbar {
