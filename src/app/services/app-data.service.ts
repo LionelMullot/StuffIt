@@ -90,8 +90,47 @@ export class AppDataService {
       collection = collection.concat(this.parseCollection(raw, categoryPath).filter(item => {
         return !!item;
       }));
+      collection.sort(this.collectionComparator);
       return collection;
     });
+  }
+
+  /**
+   * Comparator for Collection and Collectionnable
+   * @param a First item to compare
+   * @param b Second item to compare
+   */
+  private collectionComparator(a, b) {
+    if(a instanceof Collection && b instanceof Collectionnable) {
+      return -1;
+    }
+    if (b instanceof Collection && a instanceof Collectionnable) {
+      return 1;
+    }
+    if (a instanceof Collection && b instanceof Collection) {
+      if (a.getName() < b.getName()) {
+        return -1;
+      }
+      if (a.getName() > b.getName()) {
+        return 1;
+      }
+    }
+    if (a instanceof Collectionnable && b instanceof Collectionnable) {
+      if (a.getNumber() || b.getNumber()) {
+        let aNumber = parseInt(a.getNumber(), 10);
+        let bNumber = parseInt(b.getNumber(), 10);
+        if (aNumber !== bNumber) {
+          return aNumber < bNumber ? -1 : 1;
+        }
+      }
+      if (a.getName() < b.getName()) {
+        return -1;
+      }
+      if (a.getName() > b.getName()) {
+        return 1;
+      }
+    }
+    return 0;
   }
 
   /**
