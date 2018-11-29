@@ -5,6 +5,11 @@ export class Category {
   model: object;
   children: Category[];
 
+  /**
+   * 
+   * @param id Id of the category
+   * @param rawJson Raw data returned by the BE
+   */
   constructor(id: string, rawJson) {
     this.id = id;
     this.name = rawJson.name;
@@ -13,6 +18,17 @@ export class Category {
     this.children = this.buildChildCategory(rawJson.child);
   }
 
+  /**
+   * Retrive the name of the category
+   */
+  public getName() {
+    return this.name;
+  }
+
+  /**
+   * Allow to build children category of the current category
+   * @param rawChildren Raw data returned by the BE
+   */
   protected buildChildCategory(rawChildren): Category[] {
     var children: Category[];
     if (rawChildren) {

@@ -23,7 +23,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     success: null
   }
 
-  private newItem: Collectionnable = new Collectionnable();
+  private newItem: Collectionnable = new Collectionnable(null, null);
   private categoriesComponentRef: ItemCategoryBoxComponent[] = [];
   private categoryPath: Category[] = []
   private categoriesList: Category[] = []; 
@@ -53,7 +53,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
       this.categoriesList = this.categoryPath[categoryPathLength - 1].children || [];
     } else {
       this.appData.getCategories()
-      .then((categories) => {
+      .subscribe((categories) => {
         this.categoriesList = categories;
       })
     }
@@ -119,7 +119,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
       this.toggleValidation(true, `${this.newItem.getName()} a bien été ajouté à la collection.`);
 
       // Reset item and categoties
-      this.newItem = new Collectionnable();
+      this.newItem = new Collectionnable(null, null);
       this.categoryPath = []
       this.categoryContainer.clear();
       this.categoriesComponentRef = [];

@@ -17,8 +17,12 @@ const routes: Routes = [
   },
   { 
     path: 'collection',
-    component: CollectionComponent 
-  }
+    component: CollectionComponent
+  },
+  { 
+    path: 'collection/:id',
+    component: CollectionComponent
+  } 
 ];
 
 @NgModule({

@@ -1,12 +1,12 @@
 <div class="item">
-  <div class="item-content">
-    <div class="item-content-number serial">2</div>
+  <div [routerLink]="'/collection'" [queryParams]="{ path: myLittlePath }" class="item-content">
+    <div class="item-content-number serial" *ngIf="item.number">{{item.number}}</div>
     <div class="item-content-title">
-      <p>Les aventuriers du rail en Europe</p>
+      <p>{{item.getName()}}</p>
     </div>
-    <div class="item-content-number child">6</div>
+    <div class="item-content-number child" *ngIf="item.childNumber">{{item.childNumber}}</div>
   </div>
-  <div class="item-category">
-    <p class="item-category-title">Jeux de société</p>
+  <div class="item-category" *ngIf="item.category">
+    <p class="item-category-title">{{item.category.name}}</p>
   </div>
 </div>

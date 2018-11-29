@@ -5,9 +5,10 @@ $category-size:100px;
   width: 210px;
   height: 210px;
   margin-right: $category-size / 2 + 20px; 
-  margin-top: $category-size / 2; 
+  margin-top: $category-size / 2;
   
   display: inline-block;
+  vertical-align: middle;
 }
 
 .item {
@@ -30,6 +31,11 @@ $category-size:100px;
     box-sizing: border-box;
 
     background: $grey;
+
+    cursor: pointer;
+    &:hover {
+      background: $dark-grey;
+    }
 
     &-title {
       color: $light-black;
