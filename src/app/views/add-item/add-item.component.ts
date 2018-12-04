@@ -116,16 +116,56 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     }
 
     /** Valid form */
-    this.appData.addToCollection(path, this.newItem).then(() => {
-      this.toggleValidation(true, `${this.newItem.getName()} a bien été ajouté à la collection.`);
+    let hasSemicolon = this.newItem.name.indexOf(";") || this.newItem.getNumber().indexOf(";");
 
-      // Reset item and categoties
-      this.newItem = new Collectionnable(null, null);
-      this.categoryPath = []
-      this.categoryContainer.clear();
-      this.categoriesComponentRef = [];
-      this.createNewCategoryBox(null);
-    });
+    if(hasSemicolon >= 0) {
+      let names = this.newItem.name.split(";");
+      let numbers = this.newItem.number.split(";");
+      let nameLength = names.length;
+      let numberLength = numbers.length;
+      let hasSameLength = nameLength === numberLength;
+      // Multiple add
+      if(!(hasSameLength || nameLength === 0 || numberLength === 0)) {
+        this.toggleValidation(false, "Pour un ajout multiple il faut que le nombre d'entrée pour le nom soit égale au nombre d'entrée pour le numéro.");
+        return;
+      }
+      let promises = [];
+      if (nameLength === 0) {
+        names.forEach((name, index) => {
+          let item = new Collectionnable({name: name, number: numbers[index]}, null);
+          promises.push(this.appData.addToCollection(path, item));
+        });
+      } else {
+        numbers.forEach((number) => {
+          let item = new Collectionnable({number: number}, null);
+          promises.push(this.appData.addToCollection(path, item));
+        });
+      }
+      names.forEach((name, index) => {
+        let item = new Collectionnable({name: name, number: numbers[index]}, null);
+        promises.push(this.appData.addToCollection(path, item));
+      });
+
+      Promise.all(promises).then(()=> {
+        this.toggleValidation(true, `L'ensemble des éléments ont été ajouté à la collection.`);
+        this.resetForm();
+      });
+    } else {
+      // Single add
+      this.appData.addToCollection(path, this.newItem).then(() => {
+        this.toggleValidation(true, `${this.newItem.getName()} a bien été ajouté à la collection.`);
+        this.resetForm();
+      });
+    }
+  }
+
+  private resetForm() {
+    // Reset item and categoties
+    this.newItem = new Collectionnable(null, null);
+    this.categoryPath = []
+    this.categoryContainer.clear();
+    this.categoriesComponentRef = [];
+    this.createNewCategoryBox(null);
   }
 
   /**
