@@ -1,0 +1,12 @@
+<table class="table">
+  <thead class="table-header">
+    <tr>
+      <th class="table-header-numero">Numéro</th>
+      <th class="table-header-title">Titre</th>
+      <th class="table-header-childNumber" >Nombre</th>
+    </tr>
+  </thead>
+  <tbody  class="table-body">
+    <tr app-item-table-line *ngFor="let item of collection" [item]="item"></tr>
+  </tbody>
+</table> 

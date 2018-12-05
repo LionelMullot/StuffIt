@@ -14,6 +14,7 @@ export class CollectionComponent implements OnInit {
 
   // Will contain Collection and Collectionnable
   private collection: any[];
+  private template: string;
 
   constructor( 
     public appData: AppDataService,   
@@ -60,6 +61,10 @@ export class CollectionComponent implements OnInit {
       })
       this.titleService.setNavPath(navPath);
     })
+  }
+
+  onTemplateChange(template: string){
+    this.template = template;
   }
 
 }

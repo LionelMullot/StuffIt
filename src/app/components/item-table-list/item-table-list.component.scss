@@ -1,0 +1,40 @@
+@import './src/styles/utils.scss';
+
+:host {
+  display: block;
+  text-align: center;
+
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  &-header {
+    background: $pink;
+    color: $white;
+    th {
+      padding: 10px;
+    }
+    &-numero {
+      width: 75px;
+    }
+    &-title {
+      text-align: left;
+    }
+    &-childNumber {
+      width: 100px;
+    }
+  }
+  &-body {
+    tr {
+      background: $grey;
+      &:nth-child(2n) {
+      background: $white;
+      }
+      &:hover {
+        background: $dark-grey;
+      }
+    }
+  }
+}

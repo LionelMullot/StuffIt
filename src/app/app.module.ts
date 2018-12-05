@@ -15,6 +15,9 @@ import { environment } from 'src/environments/environment';
 import { ItemCategoryBoxComponent } from './components/item-category-box/item-category-box.component';
 import { ChoicePopupComponent } from './components/choice-popup/choice-popup.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ItemTableLineComponent } from './components/item-table-line/item-table-line.component';
+import { ItemTableListComponent } from './components/item-table-list/item-table-list.component';
+import { TemplateToogleComponent } from './components/template-toogle/template-toogle.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { AppRoutingModule } from './app-routing.module';
     CollectionComponent,
     AddItemComponent,
     ItemCategoryBoxComponent,
-    ChoicePopupComponent
+    ChoicePopupComponent,
+    ItemTableLineComponent,
+    ItemTableListComponent,
+    TemplateToogleComponent
   ],
   imports: [
     BrowserModule,

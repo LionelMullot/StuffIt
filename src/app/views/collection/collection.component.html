@@ -1,2 +1,9 @@
-<app-item-box-list [collection]="collection">
-</app-item-box-list>
+<app-template-toogle (template)="onTemplateChange($event)"></app-template-toogle>
+<ng-container *ngIf="template === 'box'" >
+  <app-item-box-list [collection]="collection">
+  </app-item-box-list>
+</ng-container>
+
+<ng-container *ngIf="template === 'list'" >
+  <app-item-table-list [collection]="collection"></app-item-table-list>
+</ng-container>

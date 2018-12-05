@@ -1,9 +1,10 @@
+@import './src/styles/utils.scss';
+
 :host {
   display: block;
   text-align: center;
 
   width: 100%;
-  margin-top: -130px;
 }
 
 app-item-box {

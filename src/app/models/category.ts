@@ -19,7 +19,7 @@ export class Category {
   }
 
   /**
-   * Retrive the name of the category
+   * Retrieve the name of the category
    */
   public getName() {
     return this.name;

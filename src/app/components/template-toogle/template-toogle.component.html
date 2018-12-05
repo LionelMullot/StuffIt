@@ -1,0 +1,13 @@
+<div class="toogle">
+  <div class="toogle-choice" [ngClass]="{'selected': templateValue === 'list'}" (click)="onSelectTemplate('list')">
+      <div class="toogle-choice-line"></div>
+      <div class="toogle-choice-line"></div>
+      <div class="toogle-choice-line"></div>
+  </div>
+  <div class="toogle-choice" [ngClass]="{'selected': templateValue === 'box'}" (click)="onSelectTemplate('box')">
+      <div class="toogle-choice-box"></div>
+      <div class="toogle-choice-box"></div>
+      <div class="toogle-choice-box"></div>
+      <div class="toogle-choice-box"></div>
+  </div>
+</div>
