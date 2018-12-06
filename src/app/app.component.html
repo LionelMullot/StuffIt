@@ -3,8 +3,10 @@
     <div class="content-header-menu">
       <a routerLink="/collection"><img class="content-header-menu-logo" src="./assets/logo87x87.png"/></a>
       <div class="content-header-menu-list">
-        <a routerLink="/addItem" class="content-header-menu-list-item">Ajout</a>
-        <a routerLink="/collection" class="content-header-menu-list-item">Marine & Lionel</a>
+          <a *ngIf="user" routerLink="/addItem" class="content-header-menu-list-item">Ajout</a>
+          <a *ngIf="!user" routerLink="/login" class="content-header-menu-list-item">Connexion</a>
+          <a *ngIf="user" routerLink="/collection" class="content-header-menu-list-item">Ma collection</a>
+          <a *ngIf="user" class="content-header-menu-list-item" (click)="onDisconnect()">Déconnexion</a>
       </div>
     </div>
     <h1 class="content-header-title">{{pageTitle}}</h1>

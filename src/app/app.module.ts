@@ -18,6 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { ItemTableLineComponent } from './components/item-table-line/item-table-line.component';
 import { ItemTableListComponent } from './components/item-table-list/item-table-list.component';
 import { TemplateToogleComponent } from './components/template-toogle/template-toogle.component';
+import { LoginComponent } from './views/login/login.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LoginActivateGuard } from './auth/login-activate.guard';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,9 @@ import { TemplateToogleComponent } from './components/template-toogle/template-t
     ChoicePopupComponent,
     ItemTableLineComponent,
     ItemTableListComponent,
-    TemplateToogleComponent
+    TemplateToogleComponent,
+    LoginComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

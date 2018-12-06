@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AddItemComponent } from './views/add-item/add-item.component';
 import { CollectionComponent } from './views/collection/collection.component';
+import { LoginComponent } from './views/login/login.component';
+import { LoginActivateGuard } from './auth/login-activate.guard';
 
 
 const routes: Routes = [
@@ -13,7 +15,8 @@ const routes: Routes = [
   },
   { 
     path: 'addItem',
-    component: AddItemComponent 
+    component: AddItemComponent,
+    canActivate:[LoginActivateGuard]
   },
   { 
     path: 'collection',
@@ -22,12 +25,17 @@ const routes: Routes = [
   { 
     path: 'collection/:id',
     component: CollectionComponent
+  },
+  { 
+    path: 'login',
+    component: LoginComponent
   } 
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
+  providers: [LoginActivateGuard],
   declarations: []
 })
 

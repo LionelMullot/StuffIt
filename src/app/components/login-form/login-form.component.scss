@@ -1,0 +1,24 @@
+@import './src/styles/utils.scss';
+
+:host {
+  top: -130px;
+  position: relative;
+}
+
+.form {
+  background: $grey;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  margin: auto;
+  &-error {
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 10px 0px;
+    text-align: center;
+    background: $pink;
+  }
+  input {
+    width: 100%;
+  }
+}

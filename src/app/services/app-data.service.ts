@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -6,7 +6,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Collectionnable } from './../models/collectionnable';
 import { Category } from '../models/category';
 import { Collection } from '../models/collection';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 
@@ -15,15 +14,19 @@ import 'rxjs/add/operator/map';
 })
 export class AppDataService {
 
-  private currentUser = {
-    uid: "tV1zLe4gazWf1XQKZIkkl6k3AIw2"
-  };
+  public userEmitter: EventEmitter<object> = new EventEmitter<object>();
+  private currentUser;
   private categories: Category[];
 
   constructor(private angularFire: AngularFireDatabase, public afAuth: AngularFireAuth) { 
     this.getCategories().subscribe(categories => {
       this.categories = categories;
-    })
+    });
+    this.afAuth.auth.onAuthStateChanged((user) => {
+      this.currentUser = user;
+      this.userEmitter.emit(this.currentUser);
+    });
+
    }
 
   /**
@@ -32,14 +35,16 @@ export class AppDataService {
    * @param password Password of the user
    */
   public signInWithEmailAndPassword(mail: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(mail, password)
-      .then((success) => {
-        console.info("%c Sucessful login", "color:#bb00bb")
-      })
-      .catch((err) => {
-        console.info("%c Login failed", "color:#ff0000")
-      });
+    return this.afAuth.auth.signInWithEmailAndPassword(mail, password);
 
+  }
+
+  public logOut() {
+    return this.afAuth.auth.signOut();
+  }
+
+  public getCurrentUser(){
+    return this.currentUser;
   }
 
   /**

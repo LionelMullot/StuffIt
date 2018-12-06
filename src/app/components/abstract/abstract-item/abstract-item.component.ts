@@ -12,7 +12,6 @@ export abstract class AbstractItemComponent implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      debugger;
       if(this.item instanceof Collection) {
         // This path should lead to a new collection
         this.myLittlePath = params.path ? params.path + "_" : "";

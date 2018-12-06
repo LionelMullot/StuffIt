@@ -15,6 +15,7 @@ export class CollectionComponent implements OnInit {
   // Will contain Collection and Collectionnable
   private collection: any[];
   private template: string;
+  private path = [];
 
   constructor( 
     public appData: AppDataService,   
@@ -23,20 +24,36 @@ export class CollectionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.appData.userEmitter.subscribe((user) => {
+      this.loadCollection();
+    })
     this.route.queryParams.subscribe(params => {
-      let path = [];
       if (params.path) {
-        path = params.path.split("_");
+        this.path = params.path.split("_");
       }      
-      this.buildNavPath(path);
-
-      this.appData.getCollection(path).subscribe((collection) => {
-        this.collection = collection;
-      });
+      this.buildNavPath(this.path);
+      this.loadCollection();
     });
     this.titleService.setTitle("Ma collection");
   }
 
+  /**
+   * Load the collection
+   */
+  private loadCollection(){
+    if(this.appData.getCurrentUser() && this.path) {
+      this.appData.getCollection(this.path).subscribe((collection) => {
+        this.collection = collection;
+      });
+    } else {
+      this.collection = [];
+    }
+  }
+
+  /**
+   * Build the navigation path and set it to the title
+   * @param path String array to build the navigation path
+   */
   private buildNavPath(path: string[]): void{
     let navPath: Path[] = [];
     this.appData.getCategories().subscribe((categories)=> {
