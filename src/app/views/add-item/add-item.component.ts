@@ -130,7 +130,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
         return;
       }
       let promises = [];
-      if (nameLength === 0) {
+      if (nameLength !== 0) {
         names.forEach((name, index) => {
           let item = new Collectionnable({name: name, number: numbers[index]}, null);
           promises.push(this.appData.addToCollection(path, item));
@@ -141,10 +141,6 @@ export class AddItemComponent implements OnInit, AfterViewInit {
           promises.push(this.appData.addToCollection(path, item));
         });
       }
-      names.forEach((name, index) => {
-        let item = new Collectionnable({name: name, number: numbers[index]}, null);
-        promises.push(this.appData.addToCollection(path, item));
-      });
 
       Promise.all(promises).then(()=> {
         this.toggleValidation(true, `L'ensemble des éléments ont été ajouté à la collection.`);
