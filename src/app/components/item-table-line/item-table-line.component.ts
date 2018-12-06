@@ -19,7 +19,7 @@ export class ItemTableLineComponent extends AbstractItemComponent {
 
   @HostListener('click', ['$event'])
   onClick() {
-    this.router.navigate(['/collection'], { queryParams: {path: this.myLittlePath }});
+    this.router.navigate(['/collection'], { queryParams: {path: this.myLittlePath, user: this.myLittleUser }});
   }
 
 }

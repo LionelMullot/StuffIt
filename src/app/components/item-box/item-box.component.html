@@ -1,5 +1,5 @@
 <div class="item">
-  <div [routerLink]="'/collection'" [queryParams]="{ path: myLittlePath }" class="item-content">
+  <div [routerLink]="'/collection'" [queryParams]="{ path: myLittlePath, user: myLittleUser }" class="item-content">
     <div class="item-content-number serial" *ngIf="item.number">{{item.number}}</div>
     <div class="item-content-title" [ngClass]="{'bold':item.childNumber}">
       <p>{{item.getName()}}</p>

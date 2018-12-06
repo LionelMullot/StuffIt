@@ -5,12 +5,13 @@ import { AddItemComponent } from './views/add-item/add-item.component';
 import { CollectionComponent } from './views/collection/collection.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoginActivateGuard } from './auth/login-activate.guard';
+import { SearchComponent } from './views/search/search.component';
 
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/collection',
+    redirectTo: '/search',
     pathMatch: 'full'
   },
   { 
@@ -29,6 +30,10 @@ const routes: Routes = [
   { 
     path: 'login',
     component: LoginComponent
+  } ,
+  { 
+    path: 'search',
+    component: SearchComponent
   } 
 ];
 

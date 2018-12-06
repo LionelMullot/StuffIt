@@ -4,6 +4,7 @@ import { AppTitleService } from 'src/app/services/app-title-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { Path } from 'src/app/models/path';
 import { Category } from 'src/app/models/category';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-collection',
@@ -16,6 +17,7 @@ export class CollectionComponent implements OnInit {
   private collection: any[];
   private template: string;
   private path = [];
+  private userId: string;
 
   constructor( 
     public appData: AppDataService,   
@@ -24,14 +26,25 @@ export class CollectionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.appData.userEmitter.subscribe((user) => {
+    this.appData.userEmitter.subscribe(() => {
       this.loadCollection();
     })
     this.route.queryParams.subscribe(params => {
       if (params.path) {
         this.path = params.path.split("_");
-      }      
-      this.buildNavPath(this.path);
+      } else {
+        this.path = [];
+      }
+      if (params.user) {
+        this.userId = params.user;
+        this.appData.getUser(this.userId).subscribe((user) => {
+          this.titleService.setTitle("Collection de " + user.firstname);
+          this.buildNavPath(this.path, user);
+        })
+      } else {
+        this.userId = null;
+      }  
+      this.buildNavPath(this.path, null);
       this.loadCollection();
     });
     this.titleService.setTitle("Ma collection");
@@ -41,8 +54,8 @@ export class CollectionComponent implements OnInit {
    * Load the collection
    */
   private loadCollection(){
-    if(this.appData.getCurrentUser() && this.path) {
-      this.appData.getCollection(this.path).subscribe((collection) => {
+    if(this.userId || this.appData.getCurrentUser()) {
+      this.appData.getCollection(this.path, this.userId).subscribe((collection) => {
         this.collection = collection;
       });
     } else {
@@ -54,11 +67,15 @@ export class CollectionComponent implements OnInit {
    * Build the navigation path and set it to the title
    * @param path String array to build the navigation path
    */
-  private buildNavPath(path: string[]): void{
+  private buildNavPath(path: string[], user:User): void{
     let navPath: Path[] = [];
     this.appData.getCategories().subscribe((categories)=> {
       let latestCategory: Category = null;
-      navPath.push(new Path("Ma collection", "/collection", null));
+      if(user) {
+        navPath.push(new Path("Collection de " + user.firstname, "/collection", {user: user.id}));
+      } else {
+        navPath.push(new Path("Ma collection", "/collection", null));
+      }
       path.forEach((pathId, pathIndex) => {
         if (latestCategory) {
           categories = latestCategory.children;
@@ -73,7 +90,8 @@ export class CollectionComponent implements OnInit {
             return acc + "_" + value;
           }
         })
-        let item = new Path(latestCategory.getName(), "/collection", {path:queryParams});
+        let userId = user ? user.id : null;
+        let item = new Path(latestCategory.getName(), "/collection", {path:queryParams, user: userId});
         navPath.push(item);
       })
       this.titleService.setNavPath(navPath);

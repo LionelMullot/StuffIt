@@ -39,7 +39,7 @@ export class AppComponent {
 
   onDisconnect() {
     this.appData.logOut();
-    this.router.navigate(['/collection']);
+    this.router.navigate(['/search']);
 
   }
 }

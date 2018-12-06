@@ -1,0 +1,22 @@
+<div class="search-header">
+  <input type="text" [(ngModel)]="keyword" (ngModelChange)="onTextChange($event)"/>
+  <app-template-toogle (template)="onTemplateChange($event)"></app-template-toogle>
+</div>
+<ng-container *ngIf="template === 'box'" >
+    <ng-container *ngFor="let collection of collections; let i = index">
+      <div *ngIf="collection.collection.length">
+        <h2>{{collection.key}}</h2>
+        <app-item-box-list [collection]="collection.collection">
+        </app-item-box-list>
+      </div>
+    </ng-container>
+</ng-container>
+
+<ng-container *ngIf="template === 'list'" >
+  <ng-container *ngFor="let collection of collections; let i = index">
+    <div *ngIf="collection.collection.length">
+      <h2>{{collection.key}}</h2>
+      <app-item-table-list [collection]="collection.collection" [header]="false"></app-item-table-list>
+    </div>
+  </ng-container>
+</ng-container>

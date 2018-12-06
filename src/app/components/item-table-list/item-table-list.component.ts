@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ItemTableListComponent implements OnInit {
   
   @Input("collection") collection;
+  @Input("header") header;
 
   constructor() { }
 

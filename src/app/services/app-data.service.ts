@@ -7,6 +7,9 @@ import { Collectionnable } from './../models/collectionnable';
 import { Category } from '../models/category';
 import { Collection } from '../models/collection';
 import 'rxjs/add/operator/map';
+import { User } from '../models/user';
+import { combineLatest, Observable } from 'rxjs';
+import { Utils } from '../utils/utils';
 
 
 @Injectable({
@@ -47,6 +50,14 @@ export class AppDataService {
     return this.currentUser;
   }
 
+  public getUser(userId){
+    let path = `users/${userId}/`;
+    return this.angularFire.object(path).snapshotChanges().map(snapshot => {
+      let raw = snapshot.payload.val();
+      return new User(snapshot.payload.key, raw);
+    });
+  }
+
   /**
    * Add an item to the collection of the current user
    * @param categories Category navigation path to the category of the collectionnable
@@ -78,12 +89,17 @@ export class AppDataService {
   /**
    * Retrieve a collection belonging to a specific category path
    * @param categoryPath Array with category id string as a path
+   * @param userId Id of the user we want to retrieve the collection
    */
-  public getCollection(categoryPath: string[]) {
+  public getCollection(categoryPath: string[], userId: string) {
     // Collection wil contain Collection (folder) and Collectionnable (file)
     let collection = [];
 
-    let path = `collections/${this.currentUser.uid}/`;
+    if(!userId && this.getCurrentUser()) {
+      userId = this.getCurrentUser().uid;
+    }
+
+    let path = `collections/${userId}/`;
     if (categoryPath) {
       path += categoryPath.join("/child/");
     }
@@ -172,4 +188,28 @@ export class AppDataService {
       }
     })
   }
+
+  public searchUsers(name:string) {
+    let collection = [];
+    let path = `users/`;
+    name = Utils.toFirstLettersUppercase(name);
+
+    let emiter = combineLatest(
+      this.angularFire.list(path, ref => ref.orderByChild('firstname').startAt(name).endAt(name + "\uf8ff")).snapshotChanges().map((snapshot) => {
+        return snapshot.map((user) => {
+          return new User(user.key, user.payload.val());
+        });
+      }),      
+      this.angularFire.list(path, ref => ref.orderByChild('lastname').startAt(name).endAt(name + "\uf8ff")).snapshotChanges().map((snapshot) => {
+        return snapshot.map((user) => {
+          return new User(user.key, user.payload.val());
+        });
+      })
+    ).map(result => {
+      return result[0].concat(result[1]);
+    });
+
+    return emiter;
+  }
+
 }

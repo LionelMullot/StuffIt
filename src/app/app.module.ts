@@ -20,7 +20,7 @@ import { ItemTableListComponent } from './components/item-table-list/item-table-
 import { TemplateToogleComponent } from './components/template-toogle/template-toogle.component';
 import { LoginComponent } from './views/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { LoginActivateGuard } from './auth/login-activate.guard';
+import { SearchComponent } from './views/search/search.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { LoginActivateGuard } from './auth/login-activate.guard';
     ItemTableListComponent,
     TemplateToogleComponent,
     LoginComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
