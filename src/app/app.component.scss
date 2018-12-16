@@ -48,6 +48,9 @@
       align-self: center;
       display: flex;
       font-size: 12px;
+      a {
+        color: $white
+      }
 
       &-item {
         display: flex;
