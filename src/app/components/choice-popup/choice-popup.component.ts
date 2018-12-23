@@ -21,6 +21,7 @@ export class ChoicePopupComponent implements OnInit {
     if(cancel) {
       this.currentChoice = null;
     }
-    this.validate.emit(this.currentChoice);
+    this.validate.emit(this.currentChoice);    
+    this.currentChoice = null;
   }
 }

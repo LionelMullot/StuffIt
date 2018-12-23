@@ -19,7 +19,9 @@ export class ItemCategoryBoxComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    this.clickEvent.emit();
+    if(!this.currentCategory) {
+      this.clickEvent.emit();
+    }
   }
 
   /**
