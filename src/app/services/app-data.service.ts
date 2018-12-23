@@ -82,6 +82,16 @@ export class AppDataService {
       let rawCategories = snapshot.payload.val();
       return Object.keys(rawCategories).map((id) => {
         return new Category(id, rawCategories[id]);
+      }).sort((a, b) => {
+        let aName = a.getName().toLowerCase();
+        let bName = b.getName().toLowerCase();
+        if (aName === bName) {
+          return 0;
+        } else if (aName > bName) {
+          return 1;
+        } else {
+          return -1;
+        }
       })
     });
   }

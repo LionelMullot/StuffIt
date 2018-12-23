@@ -16,6 +16,19 @@ export class Category {
     this.namePlural = rawJson.namePlural;
     this.model = rawJson.model;
     this.children = this.buildChildCategory(rawJson.child);
+    if (this.children) {
+      this.children.sort((a, b) => {
+        let aName = a.getName().toLowerCase();
+        let bName = b.getName().toLowerCase();
+        if (aName === bName) {
+          return 0;
+        } else if (aName > bName) {
+          return 1;
+        } else {
+          return -1;
+        }
+      });
+    }
   }
 
   /**
