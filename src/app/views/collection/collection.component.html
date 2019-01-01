@@ -1,4 +1,7 @@
-<app-template-toogle (template)="onTemplateChange($event)"></app-template-toogle>
+<div class="toogles">
+  <app-template-toogle (template)="onTemplateChange($event)"></app-template-toogle>
+  <app-missing-toogle (missing)="onMissingChange($event)"></app-missing-toogle>
+</div>
 <ng-container *ngIf="template === 'box'" >
   <app-item-box-list [collection]="collection">
   </app-item-box-list>

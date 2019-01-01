@@ -21,6 +21,7 @@ import { TemplateToogleComponent } from './components/template-toogle/template-t
 import { LoginComponent } from './views/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SearchComponent } from './views/search/search.component';
+import { MissingToogleComponent } from './components/missing-toogle/missing-toogle.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { SearchComponent } from './views/search/search.component';
     TemplateToogleComponent,
     LoginComponent,
     LoginFormComponent,
-    SearchComponent
+    SearchComponent,
+    MissingToogleComponent
   ],
   imports: [
     BrowserModule,

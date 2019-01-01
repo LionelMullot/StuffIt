@@ -1,0 +1,40 @@
+@import './src/styles/utils.scss';
+
+:host {
+  padding-left: 20px;
+}
+
+.toogle {
+  margin: 20px 0;
+  text-align: right;
+  display: inline-block;
+  &-choice {
+    height: 50px;
+    text-align: left;
+    background: $white;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 10px;
+    box-sizing: border-box;
+    transition: all ease-in-out 200ms;
+    border-radius: 5px;
+    color: $black;
+  }
+  &-choice{
+    line-height: 50px;
+    &:hover {
+      background: $pink;
+      color: $white;
+    }
+  }
+  &.selected {
+    .toogle-choice {
+      background: $pink;
+      color: $white;
+      &:hover {
+        background: $white;
+        color: $black;
+      }
+    }
+  }
+}
