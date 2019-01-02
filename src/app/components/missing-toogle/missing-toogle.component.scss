@@ -9,6 +9,7 @@
   text-align: right;
   display: inline-block;
   &-choice {
+    position: relative;
     height: 50px;
     text-align: left;
     background: $white;
@@ -19,21 +20,38 @@
     transition: all ease-in-out 200ms;
     border-radius: 5px;
     color: $black;
-  }
-  &-choice{
     line-height: 50px;
+    &-text {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
     &:hover {
       background: $pink;
       color: $white;
     }
+    &:before {
+      width: 32px;
+      height: 32px;
+      content: '';
+      border: 2px solid $grey;
+      background-color: $white;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      background-position: 2px 3px;
+      border-radius: 50%;
+      z-index: 2;
+      display: inline-block;
+      vertical-align: middle;
+      cursor: pointer;
+      transition: all 200ms ease-in;
+    }
   }
   &.selected {
     .toogle-choice {
-      background: $pink;
-      color: $white;
-      &:hover {
-        background: $white;
-        color: $black;
+      &:before {
+        background-color: $pink;
+        border-color: $pink;
       }
     }
   }
