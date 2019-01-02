@@ -119,8 +119,11 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     let hasSemicolon = this.newItem.name.indexOf(";") || this.newItem.getNumber().indexOf(";");
 
     if(hasSemicolon >= 0) {
-      let names = this.newItem.name.split(";");
-      let numbers = this.newItem.number.split(";");
+      let hasNames = this.newItem.name && !!this.newItem.name.length;
+      let hasNumbers = this.newItem.number && !!this.newItem.number.length;
+
+      let names = hasNames ? this.newItem.name.split(";") : [];
+      let numbers = hasNumbers ? this.newItem.number.split(";") : [];
       let nameLength = names.length;
       let numberLength = numbers.length;
       let hasSameLength = nameLength === numberLength;
