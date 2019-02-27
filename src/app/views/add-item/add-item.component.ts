@@ -116,7 +116,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     }
 
     /** Valid form */
-    let hasSemicolon = this.newItem.name.indexOf(";") || this.newItem.getNumber().indexOf(";");
+    let hasSemicolon = (this.newItem.name && this.newItem.name.indexOf(";")) || (this.newItem.getNumber() && this.newItem.getNumber().indexOf(";"));
 
     if(hasSemicolon >= 0) {
       let hasNames = this.newItem.name && !!this.newItem.name.length;
