@@ -102,8 +102,6 @@ export class AppDataService {
    * @param userId Id of the user we want to retrieve the collection
    */
   public getCollection(categoryPath: string[], userId: string) {
-    // Collection wil contain Collection (folder) and Collectionnable (file)
-    let collection = [];
 
     if(!userId && this.getCurrentUser()) {
       userId = this.getCurrentUser().uid;
@@ -114,6 +112,8 @@ export class AppDataService {
       path += categoryPath.join("/child/");
     }
     return this.angularFire.object(path).snapshotChanges().map(snapshot => {
+      // Collection wil contain Collection (folder) and Collectionnable (file)
+      let collection = [];
       let raw = snapshot.payload.val();
       if (raw["child"]) {
         collection = collection.concat(this.parseCollection(raw["child"], categoryPath));

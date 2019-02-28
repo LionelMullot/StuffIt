@@ -21,10 +21,12 @@ export class AppTitleService {
   }
 
   setNavPath(path: Path[]) {
+    debugger;
     this.navPathChange.next(path);
   }
 
   getNavPath(): BehaviorSubject<Path[]> {
+    debugger;
     return this.navPathChange;
   }
 }

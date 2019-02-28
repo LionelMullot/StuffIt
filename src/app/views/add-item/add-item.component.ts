@@ -4,6 +4,7 @@ import { ItemCategoryBoxComponent } from 'src/app/components/item-category-box/i
 import { Collectionnable } from 'src/app/models/collectionnable';
 import { Category } from 'src/app/models/category';
 import { AppTitleService } from 'src/app/services/app-title-service.service';
+import 'rxjs/add/operator/take'
 
 @Component({
   selector: 'app-add-item',
@@ -54,6 +55,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
       this.categoriesList = this.categoryPath[categoryPathLength - 1].children || [];
     } else {
       this.appData.getCategories()
+      .take(1)
       .subscribe((categories) => {
         this.categoriesList = categories;
       })

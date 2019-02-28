@@ -41,7 +41,7 @@ export class CollectionComponent implements OnInit {
       }
       if (params.user) {
         this.userId = params.user;
-        this.appData.getUser(this.userId).subscribe((user) => {
+        this.appData.getUser(this.userId).take(1).subscribe((user) => {
           this.titleService.setTitle("Collection de " + user.firstname);
           this.buildNavPath(this.path, user);
         })
@@ -122,7 +122,7 @@ export class CollectionComponent implements OnInit {
    */
   private buildNavPath(path: string[], user:User): void{
     let navPath: Path[] = [];
-    this.appData.getCategories().subscribe((categories)=> {
+    this.appData.getCategories().take(1).subscribe((categories)=> {
       let latestCategory: Category = null;
       if(user) {
         navPath.push(new Path("Collection de " + user.firstname, "/collection", {user: user.id}));
