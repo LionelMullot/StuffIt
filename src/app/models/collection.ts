@@ -33,14 +33,12 @@ export class Collection {
         this.calculateChildNumber(rawJson.child);
       } else {
         let child = rawJson[childId];
+        
         if(child.name || child.number) {
           // Final element, so just +1
           ++this.childNumber;
         } else {
-          this.childNumber += Object.keys(rawJson[childId]).length
-          if (hasChild) {
-            --this.childNumber;
-          }
+          this.calculateChildNumber(child);
         }
       }
     });
