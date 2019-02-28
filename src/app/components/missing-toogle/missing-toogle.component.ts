@@ -13,7 +13,7 @@ export class MissingToogleComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { 
-    this.missingActivated = !!localStorage.getItem('missingActivated') || false;
+    this.missingActivated = localStorage.getItem('missingActivated') === "true";
     this.missing.emit(this.missingActivated);
   }
 

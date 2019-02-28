@@ -28,7 +28,8 @@ export class CollectionComponent implements OnInit {
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.displayMissing = localStorage.getItem("missingActivated") === "true";
     this.appData.userEmitter.subscribe(() => {
       this.loadCollection();
     })
