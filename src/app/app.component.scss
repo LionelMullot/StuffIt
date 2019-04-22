@@ -1,71 +1,46 @@
 @import './src/styles/utils.scss';
 
+:host {
+  position: relative;
+  display: block;
+}
+
+.top-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $light-black;
+  height: 350px;
+  width: 100%;
+}
+
+.bottom-color {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: $light-black;
+  height: 100px;
+  width: 100%;
+}
+
 .content {
   display: flex;
   flex-direction: column;
-  background-image: url("/assets/contentBackground.png");
+  margin: 0 auto;
   min-height: 100vh;
+  width: 75%;
   position: relative;
 
   &-header {
-    display: flex;
-    flex-direction: column;
-
-    background: $light-black;
     height: 350px;
-    color: $white;
-
-    &-menu {
-      align-self: center;
-      width: 75%;
-      margin-top: 20px;
-      padding-right: 67.5px;
-      box-sizing: border-box;
-      &-logo{
-        float: left;
-      }
-      &-list {
-        text-align: right;
-        &-item {
-          margin-left: 15px;
-          color: $white;
-          &:hover {
-            color: $pink;
-          }
-          &:visited {
-            color: $white;
-          }
-        }
-      }
-    }
-
-    &-title {
-      font-size: 40px;
-      align-self: center;
-      margin-top: 15px;
-    }
-    &-nav {
-      align-self: center;
-      display: flex;
-      font-size: 12px;
-      a {
-        color: $white
-      }
-
-      &-item {
-        display: flex;
-        &-separator {
-          padding: 0px 5px;
-        }
-      }
-    }
-  }  
+    width: 100%;
+    box-sizing: border-box;
+  }
 
   &-footer {
     display: flex;
     flex-direction: column;
 
-    background: $light-black;
     height: 100px;
     width: 100%;
     color: $white;
@@ -74,23 +49,20 @@
 
   &-main {
     align-self: center;
-    width: 75%;
+    width: 100%;
   }
+  
   @media screen and (max-width: 1400px) {
-    &-main {
-      width: 1000px;
-    }
+    width: 1000px;
   }
+
   @media screen and (max-width: 1100px) {
-    &-main {
-      width: 600px;
-    }
+    width: 600px;
   }
+
   @media screen and (max-width: 800px) {
-    &-main {
-      width: 100%;
-      padding: 0 20px;
-      box-sizing: border-box;
-    }
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
 }

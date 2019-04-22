@@ -22,6 +22,7 @@ import { LoginComponent } from './views/login/login.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { SearchComponent } from './views/search/search.component';
 import { MissingToogleComponent } from './components/missing-toogle/missing-toogle.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MissingToogleComponent } from './components/missing-toogle/missing-toog
     LoginComponent,
     LoginFormComponent,
     SearchComponent,
-    MissingToogleComponent
+    MissingToogleComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

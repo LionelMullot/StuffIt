@@ -1,0 +1,18 @@
+<a routerLink="/collection"><img class="header-logo" src="./assets/logo87x87.png"/></a>
+
+<div class="header-menu">
+  <div class="header-menu-list">
+    <a routerLink="/search" class="header-menu-list-item">Recherche</a>
+    <a *ngIf="user" routerLink="/addItem" class="header-menu-list-item">Ajout</a>
+      <a *ngIf="!user" routerLink="/login" class="header-menu-list-item">Connexion</a>
+      <a *ngIf="user" routerLink="/collection" class="header-menu-list-item">Ma collection</a>
+      <a *ngIf="user" class="header-menu-list-item" (click)="onDisconnect()">Déconnexion</a>
+  </div>
+</div>
+<h1 class="header-title">{{pageTitle}}</h1>
+<ul class="header-nav">
+  <li class="header-nav-item" *ngFor="let path of navPath; let i = index">
+    <a [routerLink]="path.path" [queryParams]="path.queryParams" class="header-nav-item-link">{{path.name}}</a>
+    <p class="header-nav-item-separator" *ngIf="i !== (navPath.length - 1)"> > </p>
+  </li>
+</ul>

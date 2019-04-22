@@ -1,7 +1,9 @@
 @import './styles/reset.scss';
 @import './styles/utils.scss';
+
 body {
   font-family: 'Rubik', sans-serif;
+  background-image: url("/assets/contentBackground.png");
 }
 
 a {
