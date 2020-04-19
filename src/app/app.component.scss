@@ -35,7 +35,53 @@
     height: 350px;
     width: 100%;
     box-sizing: border-box;
-  }
+    color: $white;
+
+    &-menu {
+      align-self: center;
+      width: 75%;
+      margin-top: 20px;
+      padding-right: 67.5px;
+      box-sizing: border-box;
+      &-logo{
+        float: left;
+      }
+      &-list {
+        text-align: right;
+        &-item {
+          margin-left: 15px;
+          color: $white;
+          &:visited {
+            color: $white;
+          }
+          &:hover {
+            color: $pink;
+          }
+        }
+      }
+    }
+
+    &-title {
+      font-size: 40px;
+      align-self: center;
+      margin-top: 15px;
+    }
+    &-nav {
+      align-self: center;
+      display: flex;
+      font-size: 12px;
+      a {
+        color: $white
+      }
+
+      &-item {
+        display: flex;
+        &-separator {
+          padding: 0px 5px;
+        }
+      }
+    }
+  }  
 
   &-footer {
     display: flex;
