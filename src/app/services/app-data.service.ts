@@ -32,6 +32,15 @@ export class AppDataService {
 
    }
 
+  public asyncGetCurrentUser() {
+    return new Promise((resolve, reject) => {
+       const unsubscribe = this.afAuth.auth.onAuthStateChanged(user => {
+          unsubscribe();
+          resolve(user);
+       }, reject);
+    });
+  }
+
   /**
    * Authentificate user on firebase with a mail and a passwork
    * @param mail Email of the user

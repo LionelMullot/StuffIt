@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { CanActivate, Router } from '@angular/router';
 import { AppDataService } from '../services/app-data.service';
 
 @Injectable({
@@ -8,17 +7,18 @@ import { AppDataService } from '../services/app-data.service';
 })
 export class LoginActivateGuard implements CanActivate {
   constructor(
-    private appDate: AppDataService, 
+    private appData: AppDataService, 
     private router: Router
   ) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      if (this.appDate.getCurrentUser()) {
+  canActivate(): Promise<boolean> {
+    return this.appData.asyncGetCurrentUser().then((user) => {
+      if (user) {
         return true;
+      } else {
+        this.router.navigate(['/login']);
+        return false;
       }
-      this.router.navigate(['/login']);
-      return false;
+    });
   }
 }
