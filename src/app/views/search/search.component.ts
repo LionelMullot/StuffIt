@@ -13,14 +13,14 @@ export class SearchComponent implements OnInit {
      {
        key: "Utilisateurs",
        collection: []
-     }, 
+     },
      {
        key: "Ma collection",
        collection: []
      }
   ];
-  private template: string;
-  private keyword: string;
+  public template: string;
+  public keyword: string;
 
   constructor(
     private appData: AppDataService,
@@ -31,7 +31,7 @@ export class SearchComponent implements OnInit {
     this.titleService.setTitle("Recherche");
     this.titleService.setNavPath([]);
   }
-  
+
   onTemplateChange(template: string){
     this.template = template;
   }

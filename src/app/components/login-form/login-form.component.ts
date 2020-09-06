@@ -10,24 +10,24 @@ import { Router } from '@angular/router';
 })
 export class LoginFormComponent implements OnInit {
 
-  private user = {
+  public user = {
     mail: "",
     password: ""
   }
-  private error: string;
+  public error: string;
 
-  constructor( 
+  constructor(
     private titleService: AppTitleService,
     private appData: AppDataService,
     protected router: Router
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.titleService.setTitle("Connexion");
     this.titleService.setNavPath([]);
   }
 
-  onSubmit() { 
+  onSubmit() {
     if(!this.user.mail) {
       this.error = "Un mail est requis.";
       return;

@@ -1,5 +1,5 @@
 <div class="search-header">
-  <input type="text" [(ngModel)]="keyword" (ngModelChange)="onTextChange($event)"/>
+  <input type="text" [(ngModel)]="keyword" (ngModelChange)="onTextChange()"/>
   <div class="search-header-toggles">
     <app-template-toogle (template)="onTemplateChange($event)"></app-template-toogle>
   </div>

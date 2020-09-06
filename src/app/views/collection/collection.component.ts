@@ -16,19 +16,19 @@ import { Collection } from 'src/app/models/collection';
 export class CollectionComponent implements OnInit {
 
   // Will contain Collection and Collectionnable
-  private collection: any[];
-  private template: string;
+  public collection: any[];
+  public template: string;
   private displayMissing: boolean;
   private path = [];
   private userId: string;
 
-  constructor( 
-    public appData: AppDataService,   
+  constructor(
+    public appData: AppDataService,
     private titleService: AppTitleService,
     private route: ActivatedRoute
   ) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.displayMissing = localStorage.getItem("missingActivated") === "true";
     this.appData.userEmitter.subscribe(() => {
       this.loadCollection();
@@ -47,7 +47,7 @@ export class CollectionComponent implements OnInit {
         })
       } else {
         this.userId = null;
-      }  
+      }
       this.buildNavPath(this.path, null);
       this.loadCollection();
     });
@@ -59,7 +59,7 @@ export class CollectionComponent implements OnInit {
    */
   private loadCollection(){
     if(this.userId || this.appData.getCurrentUser()) {
-      
+
       if(this.displayMissing) {
         this.loadMissingCollection();
       } else {
@@ -94,7 +94,7 @@ export class CollectionComponent implements OnInit {
                   name: "?",
                   number: lastNumber++
                 }, item.category);
-                
+
                 this.collection.push(missing);
               }
             }
@@ -104,13 +104,13 @@ export class CollectionComponent implements OnInit {
           }
         }
       });
-      
+
       if (lastNumber > 1) {
         let missing = new Collectionnable({
           name: "?",
           number: "> " + (lastNumber - 1)
         }, null);
-        
+
         this.collection.push(missing);
       }
     });

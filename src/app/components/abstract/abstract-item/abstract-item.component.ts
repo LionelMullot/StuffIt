@@ -4,9 +4,9 @@ import { Collection } from 'src/app/models/collection';
 import { User } from 'src/app/models/user';
 
 export abstract class AbstractItemComponent implements OnInit {
-  @Input('item') item;  
-  protected myLittlePath: string;
-  protected myLittleUser: string;
+  @Input('item') item;
+  public myLittlePath: string;
+  public myLittleUser: string;
 
   constructor(
     protected route: ActivatedRoute
@@ -22,7 +22,7 @@ export abstract class AbstractItemComponent implements OnInit {
       } else if(this.item instanceof User) {
         this.myLittlePath = "";
         this.myLittleUser = this.item.id;
-      } else {        
+      } else {
         // This path should not bring user to a new collection. Final item.
         this.myLittlePath = params.path ? params.path : "";
       }

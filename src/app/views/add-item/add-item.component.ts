@@ -18,22 +18,22 @@ export class AddItemComponent implements OnInit, AfterViewInit {
 
   private VALIDATION_SUCCESS = "Saisie correcte";
   private VALIDATION_FAIL = "Saisie incorrecte";
-  private validation = {
+  public validation = {
     title: null,
     message: null,
     success: null
   }
 
-  private newItem: Collectionnable = new Collectionnable(null, null);
+  public newItem: Collectionnable = new Collectionnable(null, null);
   private categoriesComponentRef: ItemCategoryBoxComponent[] = [];
   private categoryPath: Category[] = []
-  private categoriesList: Category[] = []; 
+  public categoriesList: Category[] = [];
 
   constructor(
-    public appData: AppDataService, 
+    public appData: AppDataService,
     private cdRef: ChangeDetectorRef,
-    private componentFactoryResolver: ComponentFactoryResolver,    
-    private titleService: AppTitleService) { 
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private titleService: AppTitleService) {
   }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   }
 
   /**
-   * Show popup to choose categories. 
+   * Show popup to choose categories.
    * Displayed categories will depends on latest selected category.
    */
   showPopupForCategories() {
@@ -81,7 +81,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
    * Hide popup to choose categories.
    */
   hidePopupForCategories() {
-    this.categoriesList = [];   
+    this.categoriesList = [];
   }
 
   /**
@@ -97,7 +97,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     if (category != null) {
       this.categoryPath.push(category);
       // Dynamically create category selector and keep a reference to it
-      this.createNewCategoryBox(category);  
+      this.createNewCategoryBox(category);
     }
   }
 
@@ -175,7 +175,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
    * @param message Information message to display
    */
   toggleValidation(isValid: Boolean, message: string) {
-    this.validation.success = isValid;  
+    this.validation.success = isValid;
     this.validation.title = isValid ? this.VALIDATION_SUCCESS : this.VALIDATION_FAIL;
     this.validation.message = message;
   }

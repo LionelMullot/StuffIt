@@ -10,31 +10,34 @@ import { SearchComponent } from './views/search/search.component';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/search',
-    pathMatch: 'full'
-  },
-  { 
     path: 'addItem',
     component: AddItemComponent,
-    canActivate:[LoginActivateGuard]
+    canActivate: [LoginActivateGuard]
   },
-  { 
+  {
     path: 'collection',
     component: CollectionComponent
   },
-  { 
+  {
     path: 'collection/:id',
     component: CollectionComponent
   },
-  { 
+  {
     path: 'login',
     component: LoginComponent
   } ,
-  { 
+  {
     path: 'search',
     component: SearchComponent
-  } 
+  },
+  {
+    path: '',
+    component: SearchComponent
+  },
+  {
+    path: '*',
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

@@ -9,8 +9,8 @@ import { Category } from 'src/app/models/category';
 export class ItemCategoryBoxComponent implements OnInit {
 
   @Output('clickevent') clickEvent = new EventEmitter();
-  private currentCategory: Category;
-  private parentCategory: Category;
+  public currentCategory: Category;
+  public parentCategory: Category;
 
   constructor() { }
 
