@@ -4,10 +4,7 @@
   </div>
   <input type="text" name="name" [(ngModel)]="newItem.name" autocomplete="off" placeholder="Donne moi un nom"/>
   <input type="text" name="number" [(ngModel)]="newItem.number" autocomplete="off" placeholder="Numéro de collection"/>
-  <div class="form-validation" [hidden]="!validation.title" [ngClass]="{'bad':!validation.success}">
-    <p class="form-validation-title">{{validation.title}}</p>
-    <p class="form-validation-message">{{validation.message}}</p>
-  </div>
+  <app-form-validation [validation]="validation"></app-form-validation>
   <input type="submit" value="Ajouter"/>
 </form>
 <app-choice-popup [optionsList]="categoriesList" (validate)="onPopupValidate($event)" [ngClass]="{'hide':categoriesList.length===0}"></app-choice-popup>

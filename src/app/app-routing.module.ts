@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminComponent } from './views/admin/admin.component';
 import { AddItemComponent } from './views/add-item/add-item.component';
 import { CollectionComponent } from './views/collection/collection.component';
 import { LoginComponent } from './views/login/login.component';
@@ -9,6 +10,11 @@ import { SearchComponent } from './views/search/search.component';
 
 
 const routes: Routes = [
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [LoginActivateGuard]
+  },
   {
     path: 'addItem',
     component: AddItemComponent,

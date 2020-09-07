@@ -1,0 +1,6 @@
+<form (ngSubmit)="onSubmit()">
+  <input type="text" name="firstname" [(ngModel)]="newUser.firstname" autocomplete="off" placeholder="Prénom"/>
+  <input type="text" name="lastname" [(ngModel)]="newUser.lastname" autocomplete="off" placeholder="Nom"/>
+  <app-form-validation [validation]='validation'></app-form-validation>
+  <input type="submit" value="Ajouter"/>
+</form>

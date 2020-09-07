@@ -1,0 +1,4 @@
+<div class="form-validation" [hidden]="!validation.title" [ngClass]="{'bad':!validation.success}">
+  <p class="form-validation-title">{{validation.title}}</p>
+  <p class="form-validation-message">{{validation.message}}</p>
+</div>

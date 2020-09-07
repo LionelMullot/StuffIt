@@ -67,6 +67,14 @@ export class AppDataService {
     });
   }
 
+  public addUser(firstname, lastName) {
+    const path = `users/`;
+    return this.angularFire.database.ref(path).push({
+      firstname: firstname,
+      lastName: lastName,
+    });
+  }
+
   /**
    * Add an item to the collection of the current user
    * @param categories Category navigation path to the category of the collectionnable

@@ -5,6 +5,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ItemBoxComponent } from './components/item-box/item-box.component';
@@ -22,6 +24,10 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { SearchComponent } from './views/search/search.component';
 import { MissingToogleComponent } from './components/missing-toogle/missing-toogle.component';
 import { HeaderComponent } from './components/header/header.component';
+import { AdminComponentComponent } from './components/admin-tabs/admin-tabs.component';
+import { AdminComponent } from './views/admin/admin.component';
+import { AdminUserComponent } from './components/admin-user/admin-user.component';
+import { FormValidationComponent } from './components/form-validation/form-validation.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +44,11 @@ import { HeaderComponent } from './components/header/header.component';
     LoginFormComponent,
     SearchComponent,
     MissingToogleComponent,
-    HeaderComponent
+    HeaderComponent,
+    AdminComponentComponent,
+    AdminComponent,
+    AdminUserComponent,
+    FormValidationComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +57,9 @@ import { HeaderComponent } from './components/header/header.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AppRoutingModule,
-    MatTableModule
+    MatTableModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
