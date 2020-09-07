@@ -8,20 +8,20 @@ import { Category } from 'src/app/models/category';
   styleUrls: ['./choice-popup.component.scss']
 })
 export class ChoicePopupComponent implements OnInit {
-  @Input('inputVar') optionsList: any[];
-  @Output('validate') validate = new EventEmitter<Category>();
-  
-  private currentChoice: any;
+  @Input() optionsList: any[];
+  @Output() validate = new EventEmitter<Category>();
+
+  public currentChoice: any;
 
   constructor(public appData: AppDataService) { }
 
   ngOnInit() {}
 
   onValidate(cancel: boolean) {
-    if(cancel) {
+    if (cancel) {
       this.currentChoice = null;
     }
-    this.validate.emit(this.currentChoice);    
+    this.validate.emit(this.currentChoice);
     this.currentChoice = null;
   }
 }

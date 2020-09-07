@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 export class LoginFormComponent implements OnInit {
 
   public user = {
-    mail: "",
-    password: ""
-  }
+    mail: '',
+    password: ''
+  };
   public error: string;
 
   constructor(
@@ -23,32 +23,32 @@ export class LoginFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Connexion");
+    this.titleService.setTitle('Connexion');
     this.titleService.setNavPath([]);
   }
 
   onSubmit() {
-    if(!this.user.mail) {
-      this.error = "Un mail est requis.";
+    if (!this.user.mail) {
+      this.error = 'Un mail est requis.';
       return;
     }
 
-    if(!this.user.password) {
-      this.error = "Un mot de passe est requis.";
+    if (!this.user.password) {
+      this.error = 'Un mot de passe est requis.';
       return;
     }
 
     this.appData.signInWithEmailAndPassword(this.user.mail, this.user.password).then(() => {
       // redirect to collection page
       this.router.navigate(['/collection']);
-    }).catch((error)=> {
-      var errorCode = error.code;
+    }).catch((error) => {
+      const errorCode = error.code;
       if (errorCode === 'auth/wrong-password') {
-        this.error = "Mot de passe incorrect.";
+        this.error = 'Mot de passe incorrect.';
       } else if (errorCode === 'user-not-found') {
-        this.error = "Mail incorrect.";
+        this.error = 'Mail incorrect.';
       } else {
-        this.error = "Combinaison mail / mot de passe incorrect";
+        this.error = 'Combinaison mail / mot de passe incorrect';
       }
     });
 

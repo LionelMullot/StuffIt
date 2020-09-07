@@ -7,7 +7,7 @@ import { AppDataService } from '../services/app-data.service';
 })
 export class LoginActivateGuard implements CanActivate {
   constructor(
-    private appData: AppDataService, 
+    private appData: AppDataService,
     private router: Router
   ) {}
 

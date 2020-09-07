@@ -7,12 +7,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TemplateToogleComponent implements OnInit {
   @Output('template') template = new EventEmitter<string>();
-  templateValue: string = "list";
+  templateValue = 'list';
 
   constructor() { }
 
-  ngOnInit() { 
-    this.templateValue = localStorage.getItem('template') || "list";
+  ngOnInit() {
+    this.templateValue = localStorage.getItem('template') || 'list';
     this.template.emit(this.templateValue);
   }
 

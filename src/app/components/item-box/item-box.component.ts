@@ -12,7 +12,7 @@ export class ItemBoxComponent extends AbstractItemComponent {
 
   constructor(
     protected route: ActivatedRoute
-  ) { 
+  ) {
     super(route);
   }
 

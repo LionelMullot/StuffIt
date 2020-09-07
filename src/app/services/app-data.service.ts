@@ -21,7 +21,7 @@ export class AppDataService {
   private currentUser;
   private categories: Category[];
 
-  constructor(private angularFire: AngularFireDatabase, public afAuth: AngularFireAuth) { 
+  constructor(private angularFire: AngularFireDatabase, public afAuth: AngularFireAuth) {
     this.getCategories().subscribe(categories => {
       this.categories = categories;
     });
@@ -55,14 +55,14 @@ export class AppDataService {
     return this.afAuth.auth.signOut();
   }
 
-  public getCurrentUser(){
+  public getCurrentUser() {
     return this.currentUser;
   }
 
-  public getUser(userId){
-    let path = `users/${userId}/`;
+  public getUser(userId) {
+    const path = `users/${userId}/`;
     return this.angularFire.object(path).snapshotChanges().map(snapshot => {
-      let raw = snapshot.payload.val();
+      const raw = snapshot.payload.val();
       return new User(snapshot.payload.key, raw);
     });
   }
@@ -74,10 +74,10 @@ export class AppDataService {
    */
   public addToCollection(categories: string[], item: Collectionnable) {
     if (categories.length) {
-      var path = `collections/${this.currentUser.uid}/`;
+      let path = `collections/${this.currentUser.uid}/`;
       path += categories.reduce((acc, value) => {
-        return acc + "/child/" + value;
-      })
+        return acc + '/child/' + value;
+      });
       return this.angularFire.database.ref(path).push(item.getFormatted());
     }
   }
@@ -86,14 +86,14 @@ export class AppDataService {
    * Retrieve all categories
    */
   public getCategories() {
-    let path = "categories/";
+    const path = 'categories/';
     return this.angularFire.object(path).snapshotChanges().map((snapshot) => {
-      let rawCategories = snapshot.payload.val();
+      const rawCategories = snapshot.payload.val();
       return Object.keys(rawCategories).map((id) => {
         return new Category(id, rawCategories[id]);
       }).sort((a, b) => {
-        let aName = a.getName().toLowerCase();
-        let bName = b.getName().toLowerCase();
+        const aName = a.getName().toLowerCase();
+        const bName = b.getName().toLowerCase();
         if (aName === bName) {
           return 0;
         } else if (aName > bName) {
@@ -101,7 +101,7 @@ export class AppDataService {
         } else {
           return -1;
         }
-      })
+      });
     });
   }
 
@@ -112,20 +112,20 @@ export class AppDataService {
    */
   public getCollection(categoryPath: string[], userId: string) {
 
-    if(!userId && this.getCurrentUser()) {
+    if (!userId && this.getCurrentUser()) {
       userId = this.getCurrentUser().uid;
     }
 
     let path = `collections/${userId}/`;
     if (categoryPath) {
-      path += categoryPath.join("/child/");
+      path += categoryPath.join('/child/');
     }
     return this.angularFire.object(path).snapshotChanges().map(snapshot => {
       // Collection wil contain Collection (folder) and Collectionnable (file)
       let collection = [];
-      let raw = snapshot.payload.val();
-      if (raw["child"]) {
-        collection = collection.concat(this.parseCollection(raw["child"], categoryPath));
+      const raw = snapshot.payload.val();
+      if (raw['child']) {
+        collection = collection.concat(this.parseCollection(raw['child'], categoryPath));
       }
       collection = collection.concat(this.parseCollection(raw, categoryPath).filter(item => {
         return !!item;
@@ -141,7 +141,7 @@ export class AppDataService {
    * @param b Second item to compare
    */
   private collectionComparator(a, b) {
-    if(a instanceof Collection && b instanceof Collectionnable) {
+    if (a instanceof Collection && b instanceof Collectionnable) {
       return -1;
     }
     if (b instanceof Collection && a instanceof Collectionnable) {
@@ -157,8 +157,8 @@ export class AppDataService {
     }
     if (a instanceof Collectionnable && b instanceof Collectionnable) {
       if (a.getNumber() || b.getNumber()) {
-        let aNumber = parseInt(a.getNumber(), 10);
-        let bNumber = parseInt(b.getNumber(), 10);
+        const aNumber = parseInt(a.getNumber(), 10);
+        const bNumber = parseInt(b.getNumber(), 10);
         if (aNumber !== bNumber) {
           return aNumber < bNumber ? -1 : 1;
         }
@@ -180,46 +180,51 @@ export class AppDataService {
    */
   private parseCollection(data, categoryPath: string[]) {
     return Object.keys(data).map((itemId) => {
-      if (itemId != "child") {
+      if (itemId !== 'child') {
         let latestCategory: Category = null;
         let categories: Category[] = this.categories;
-        let finder = function(categoryId, category) {
+        const finder = function(categoryId, category) {
           return category.id === categoryId;
-        }
+        };
 
         // Go trought categoryPath to find the current category we are on
         if (categoryPath.length) {
           categoryPath.forEach(categoryId => {
             latestCategory = categories.find(finder.bind(this, categoryId));
             categories = latestCategory.children;
-          })
+          });
         }
-        
-        let rawItem = data[itemId];
+
+        const rawItem = data[itemId];
         if (rawItem.name || rawItem.number) {
           // Final level
           return new Collectionnable(rawItem, latestCategory);
         } else {
           // Still some categories to browse
-          let item = categories.find(finder.bind(this, itemId));
+          const item = categories.find(finder.bind(this, itemId));
           return new Collection(latestCategory, item, rawItem);
         }
       }
-    })
+    });
   }
 
-  public searchUsers(name:string) {
-    let collection = [];
-    let path = `users/`;
+  /**
+   * Retrieve a user based on a name
+   * @param name Name of the user
+   */
+  public searchUsers(name: string) {
+    const collection = [];
+    const path = `users/`;
     name = Utils.toFirstLettersUppercase(name);
 
-    let emiter = combineLatest(
-      this.angularFire.list(path, ref => ref.orderByChild('firstname').startAt(name).endAt(name + "\uf8ff")).snapshotChanges().map((snapshot) => {
+    const nameFinder = (ref, key) => ref.orderByChild(key).startAt(name).endAt(name + '\uf8ff');
+    const emiter = combineLatest(
+      this.angularFire.list(path, ref => nameFinder(ref, 'firstname')).snapshotChanges().map((snapshot) => {
         return snapshot.map((user) => {
           return new User(user.key, user.payload.val());
         });
-      }),      
-      this.angularFire.list(path, ref => ref.orderByChild('lastname').startAt(name).endAt(name + "\uf8ff")).snapshotChanges().map((snapshot) => {
+      }),
+      this.angularFire.list(path, ref => nameFinder(ref, 'lastname')).snapshotChanges().map((snapshot) => {
         return snapshot.map((user) => {
           return new User(user.key, user.payload.val());
         });

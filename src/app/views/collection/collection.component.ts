@@ -29,38 +29,38 @@ export class CollectionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.displayMissing = localStorage.getItem("missingActivated") === "true";
+    this.displayMissing = localStorage.getItem('missingActivated') === 'true';
     this.appData.userEmitter.subscribe(() => {
       this.loadCollection();
-    })
+    });
     this.route.queryParams.subscribe(params => {
       if (params.path) {
-        this.path = params.path.split("_");
+        this.path = params.path.split(' ');
       } else {
         this.path = [];
       }
       if (params.user) {
         this.userId = params.user;
         this.appData.getUser(this.userId).take(1).subscribe((user) => {
-          this.titleService.setTitle("Collection de " + user.firstname);
+          this.titleService.setTitle('Collection de ' + user.firstname);
           this.buildNavPath(this.path, user);
-        })
+        });
       } else {
         this.userId = null;
       }
       this.buildNavPath(this.path, null);
       this.loadCollection();
     });
-    this.titleService.setTitle("Ma collection");
+    this.titleService.setTitle('Ma collection');
   }
 
   /**
    * Load the collection
    */
-  private loadCollection(){
-    if(this.userId || this.appData.getCurrentUser()) {
+  private loadCollection() {
+    if (this.userId || this.appData.getCurrentUser()) {
 
-      if(this.displayMissing) {
+      if (this.displayMissing) {
         this.loadMissingCollection();
       } else {
         this.appData.getCollection(this.path, this.userId).subscribe((collection) => {
@@ -75,7 +75,7 @@ export class CollectionComponent implements OnInit {
   /**
    * Load the missing collection
    */
-  private loadMissingCollection(){
+  private loadMissingCollection() {
     this.appData.getCollection(this.path, this.userId).subscribe((collection) => {
       // Keep categories and remove collectionable if it make sens (need a number)
       this.collection = [];
@@ -84,14 +84,14 @@ export class CollectionComponent implements OnInit {
         if (item instanceof Collection) {
           this.collection.push(item);
         } else if (item instanceof Collectionnable) {
-          if (item.getNumber()){
-            let number = parseInt(item.getNumber());
-            let diff = number - lastNumber;
+          if (item.getNumber()) {
+            const number = parseInt(item.getNumber(), 10);
+            const diff = number - lastNumber;
             if (diff > 0) {
               for (let i = 0; i < diff; ++i) {
                 // Create as much as necessary missing items
-                let missing = new Collectionnable({
-                  name: "?",
+                const missing = new Collectionnable({
+                  name: '?',
                   number: lastNumber++
                 }, item.category);
 
@@ -106,9 +106,9 @@ export class CollectionComponent implements OnInit {
       });
 
       if (lastNumber > 1) {
-        let missing = new Collectionnable({
-          name: "?",
-          number: "> " + (lastNumber - 1)
+        const missing = new Collectionnable({
+          name: '?',
+          number: '> ' + (lastNumber - 1)
         }, null);
 
         this.collection.push(missing);
@@ -120,14 +120,14 @@ export class CollectionComponent implements OnInit {
    * Build the navigation path and set it to the title
    * @param path String array to build the navigation path
    */
-  private buildNavPath(path: string[], user:User): void{
-    let navPath: Path[] = [];
-    this.appData.getCategories().take(1).subscribe((categories)=> {
+  private buildNavPath(path: string[], user: User): void {
+    const navPath: Path[] = [];
+    this.appData.getCategories().take(1).subscribe((categories) => {
       let latestCategory: Category = null;
-      if(user) {
-        navPath.push(new Path("Collection de " + user.firstname, "/collection", {user: user.id}));
+      if (user) {
+        navPath.push(new Path('Collection de ' + user.firstname, '/collection', {user: user.id}));
       } else {
-        navPath.push(new Path("Ma collection", "/collection", null));
+        navPath.push(new Path('Ma collection', '/collection', null));
       }
       path.forEach((pathId, pathIndex) => {
         if (latestCategory) {
@@ -135,23 +135,23 @@ export class CollectionComponent implements OnInit {
         }
         latestCategory = categories.find((category) => {
           return category.id === pathId;
-        })
-        let queryParams = path.reduce((acc, value, index) => {
+        });
+        const queryParams = path.reduce((acc, value, index) => {
           if (index > pathIndex) {
             return acc;
           } else {
-            return acc + "_" + value;
+            return acc + ' ' + value;
           }
-        })
-        let userId = user ? user.id : null;
-        let item = new Path(latestCategory.getName(), "/collection", {path:queryParams, user: userId});
+        });
+        const userId = user ? user.id : null;
+        const item = new Path(latestCategory.getName(), '/collection', {path: queryParams, user: userId});
         navPath.push(item);
-      })
+      });
       this.titleService.setNavPath(navPath);
-    })
+    });
   }
 
-  onTemplateChange(template: string){
+  onTemplateChange(template: string) {
     this.template = template;
   }
 

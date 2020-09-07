@@ -7,12 +7,12 @@ import { Path } from '../models/path';
 })
 export class AppTitleService {
 
-  private titleChange = new BehaviorSubject<string>("Stuff It !");
+  private titleChange = new BehaviorSubject<string>('Stuff It !');
   private navPathChange = new BehaviorSubject<Path[]>([]);
 
   constructor() { }
 
-  setTitle(title: string) { 
+  setTitle(title: string) {
     this.titleChange.next(title);
   }
 

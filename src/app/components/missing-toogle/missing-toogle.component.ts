@@ -8,12 +8,12 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class MissingToogleComponent implements OnInit {
 
   @Output('missing') missing = new EventEmitter<boolean>();
-  missingActivated: boolean = false;
+  missingActivated = false;
 
   constructor() { }
 
-  ngOnInit() { 
-    this.missingActivated = localStorage.getItem('missingActivated') === "true";
+  ngOnInit() {
+    this.missingActivated = localStorage.getItem('missingActivated') === 'true';
     this.missing.emit(this.missingActivated);
   }
 

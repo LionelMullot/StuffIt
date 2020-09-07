@@ -10,4 +10,4 @@
   </div>
   <input type="submit" value="Ajouter"/>
 </form>
-<app-choice-popup [inputVar]="categoriesList" (validate)="onPopupValidate($event)" [ngClass]="{'hide':categoriesList.length===0}"></app-choice-popup>
+<app-choice-popup [optionsList]="categoriesList" (validate)="onPopupValidate($event)" [ngClass]="{'hide':categoriesList.length===0}"></app-choice-popup>

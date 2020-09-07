@@ -9,13 +9,13 @@ import { AppTitleService } from 'src/app/services/app-title-service.service';
 })
 export class SearchComponent implements OnInit {
   // Will contain Collection and Collectionnable in two categories : user & my collection
-  private collections = [
+  public collections = [
      {
-       key: "Utilisateurs",
+       key: 'Utilisateurs',
        collection: []
      },
      {
-       key: "Ma collection",
+       key: 'Ma collection',
        collection: []
      }
   ];
@@ -28,16 +28,16 @@ export class SearchComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Recherche");
+    this.titleService.setTitle('Recherche');
     this.titleService.setNavPath([]);
   }
 
-  onTemplateChange(template: string){
+  onTemplateChange(template: string) {
     this.template = template;
   }
 
-  onTextChange(){
-    if(this.keyword) {
+  onTextChange() {
+    if (this.keyword) {
       this.search(this.keyword);
     } else {
       this.collections[0].collection = [];

@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./item-box-list.component.scss']
 })
 export class ItemBoxListComponent implements OnInit {
-  @Input("collection") collection;
+  @Input() collection;
 
   constructor() { }
 

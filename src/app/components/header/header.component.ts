@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.titleService.getTitle().subscribe((title) => {
       this.pageTitle = title;
     });

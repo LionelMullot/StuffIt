@@ -1,11 +1,11 @@
-import { Category } from "./category";
+import { Category } from './category';
 
 export class Collectionnable {
   name: string;
   number: string;
   category: Category;
 
-  constructor(rawData, category : Category) {
+  constructor(rawData, category: Category) {
     if (rawData) {
       this.name = rawData.name;
       this.number = rawData.number;
@@ -16,7 +16,7 @@ export class Collectionnable {
   /**
    * Retrieve name of the collectionnable
    */
-  public getName(): string{
+  public getName(): string {
     return this.name || (this.number ? `Tome ${this.number}` : null);
   }
 
@@ -28,10 +28,9 @@ export class Collectionnable {
   }
 
   getFormatted(): object {
-    let collectionnable = {};
     return {
       name: this.name || null,
       number: this.number || null
-    }
+    };
   }
 }

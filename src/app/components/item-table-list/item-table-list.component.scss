@@ -7,15 +7,30 @@
   width: 100%;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.mat {
   &-header {
-    background: $pink;
-    color: $white;
-    th {
-      padding: 10px;
+    &-row {
+      background: $pink;
+      color: $white;
+      height: auto;
     }
+    &-cell {
+      border: none;
+      padding: 10px;
+      text-align: center;
+      &:first-of-type {
+        padding-left: 10px;
+      }
+      &:last-of-type{
+        padding-left: 10px;
+      }
+    }
+  }
+  &-cdk-column {
+    text-align: center;
+  }
+  &-column {
+    text-align: center;
     &-numero {
       width: 75px;
     }
@@ -26,16 +41,29 @@
       width: 100px;
     }
   }
-  &-body {
-    tr {
-      background: $grey;
-      &:nth-child(2n) {
+  &-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  &-row {
+    background: $grey;
+    height: auto;
+    &:nth-child(2n) {
       background: $white;
-      }
-      &:hover {
-        background: $dark-grey;
-        cursor: pointer;
-      }
+    }
+    &:hover {
+      background: $dark-grey;
+      cursor: pointer;
+    }
+  }
+  &-cell {
+    border: none;
+    padding: 10px;
+    &:first-of-type {
+      padding-left: 10px;
+    }
+    &:last-of-type{
+      padding-left: 10px;
     }
   }
 }

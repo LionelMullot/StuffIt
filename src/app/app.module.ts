@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { RouterModule, Routes } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { ItemBoxComponent } from './components/item-box/item-box.component';
@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 import { ItemCategoryBoxComponent } from './components/item-category-box/item-category-box.component';
 import { ChoicePopupComponent } from './components/choice-popup/choice-popup.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ItemTableLineComponent } from './components/item-table-line/item-table-line.component';
 import { ItemTableListComponent } from './components/item-table-list/item-table-list.component';
 import { TemplateToogleComponent } from './components/template-toogle/template-toogle.component';
 import { LoginComponent } from './views/login/login.component';
@@ -33,7 +32,6 @@ import { HeaderComponent } from './components/header/header.component';
     AddItemComponent,
     ItemCategoryBoxComponent,
     ChoicePopupComponent,
-    ItemTableLineComponent,
     ItemTableListComponent,
     TemplateToogleComponent,
     LoginComponent,
@@ -48,7 +46,8 @@ import { HeaderComponent } from './components/header/header.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent],

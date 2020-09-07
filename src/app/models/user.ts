@@ -9,7 +9,7 @@ export class User {
     this.lastname = rawJson.lastname;
   }
 
-  getName(){
-    return this.firstname + " " + this.lastname;
+  getName() {
+    return this.firstname + ' ' + this.lastname;
   }
 }

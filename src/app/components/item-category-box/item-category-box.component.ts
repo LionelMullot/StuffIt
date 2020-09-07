@@ -4,11 +4,11 @@ import { Category } from 'src/app/models/category';
 @Component({
   selector: 'app-item-category-box',
   templateUrl: './item-category-box.component.html',
-  styleUrls: ['./item-category-box.component.scss','./../item-box/item-box.component.scss']
+  styleUrls: ['./item-category-box.component.scss', './../item-box/item-box.component.scss']
 })
 export class ItemCategoryBoxComponent implements OnInit {
 
-  @Output('clickevent') clickEvent = new EventEmitter();
+  @Output() clickEvent = new EventEmitter();
   public currentCategory: Category;
   public parentCategory: Category;
 
@@ -19,7 +19,7 @@ export class ItemCategoryBoxComponent implements OnInit {
 
   @HostListener('click')
   onClick() {
-    if(!this.currentCategory) {
+    if (!this.currentCategory) {
       this.clickEvent.emit();
     }
   }

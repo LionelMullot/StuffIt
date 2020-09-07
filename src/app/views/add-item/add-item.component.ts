@@ -4,7 +4,7 @@ import { ItemCategoryBoxComponent } from 'src/app/components/item-category-box/i
 import { Collectionnable } from 'src/app/models/collectionnable';
 import { Category } from 'src/app/models/category';
 import { AppTitleService } from 'src/app/services/app-title-service.service';
-import 'rxjs/add/operator/take'
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'app-add-item',
@@ -16,17 +16,17 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   @ViewChild('categoryContainer', {read: ViewContainerRef})
   private categoryContainer: ViewContainerRef;
 
-  private VALIDATION_SUCCESS = "Saisie correcte";
-  private VALIDATION_FAIL = "Saisie incorrecte";
+  private VALIDATION_SUCCESS = 'Saisie correcte';
+  private VALIDATION_FAIL = 'Saisie incorrecte';
   public validation = {
     title: null,
     message: null,
     success: null
-  }
+  };
 
   public newItem: Collectionnable = new Collectionnable(null, null);
   private categoriesComponentRef: ItemCategoryBoxComponent[] = [];
-  private categoryPath: Category[] = []
+  private categoryPath: Category[] = [];
   public categoriesList: Category[] = [];
 
   constructor(
@@ -37,7 +37,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("Ajoutes un truc !");
+    this.titleService.setTitle('Ajoutes un truc !');
     this.titleService.setNavPath([]);
   }
 
@@ -58,7 +58,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
       .take(1)
       .subscribe((categories) => {
         this.categoriesList = categories;
-      })
+      });
     }
   }
 
@@ -73,7 +73,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
     categoryBox.instance.clickEvent.subscribe(() => {
       this.showPopupForCategories();
-    })
+    });
     this.categoriesComponentRef.push(categoryBox.instance);
   }
 
@@ -102,52 +102,55 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   }
 
   onSubmit() {
-    var path = this.categoryPath.map((category) => {
+    const path = this.categoryPath.map((category) => {
       return category.id;
     });
 
     /** Invalid form */
     if (path.length === 0) {
-      this.toggleValidation(false, "Au moins une categorie doit être choisie.");
+      this.toggleValidation(false, 'Au moins une categorie doit être choisie.');
       return;
     }
 
     if (!this.newItem.getName()) {
-      this.toggleValidation(false, "Un titre ou un numéro est nécessaire pour ajouter à la collection.");
+      this.toggleValidation(false, 'Un titre ou un numéro est nécessaire pour ajouter à la collection.');
       return;
     }
 
     /** Valid form */
-    let hasSemicolon = (this.newItem.name && this.newItem.name.indexOf(";")) || (this.newItem.getNumber() && this.newItem.getNumber().indexOf(";"));
+    const hasSemicolonOnName = this.newItem.name && this.newItem.name.indexOf(';');
+    const hasSemicolonOnNumber = this.newItem.getNumber() && this.newItem.getNumber().indexOf(';');
+    const hasSemicolon = hasSemicolonOnName || hasSemicolonOnNumber;
 
-    if(hasSemicolon >= 0) {
-      let hasNames = this.newItem.name && !!this.newItem.name.length;
-      let hasNumbers = this.newItem.number && !!this.newItem.number.length;
+    if (hasSemicolon >= 0) {
+      const hasNames = this.newItem.name && !!this.newItem.name.length;
+      const hasNumbers = this.newItem.number && !!this.newItem.number.length;
 
-      let names = hasNames ? this.newItem.name.split(";") : [];
-      let numbers = hasNumbers ? this.newItem.number.split(";") : [];
-      let nameLength = names.length;
-      let numberLength = numbers.length;
-      let hasSameLength = nameLength === numberLength;
+      const names = hasNames ? this.newItem.name.split(';') : [];
+      const numbers = hasNumbers ? this.newItem.number.split(';') : [];
+      const nameLength = names.length;
+      const numberLength = numbers.length;
+      const hasSameLength = nameLength === numberLength;
       // Multiple add
-      if(!(hasSameLength || nameLength === 0 || numberLength === 0)) {
-        this.toggleValidation(false, "Pour un ajout multiple il faut que le nombre d'entrée pour le nom soit égale au nombre d'entrée pour le numéro.");
+      if (!(hasSameLength || nameLength === 0 || numberLength === 0)) {
+        const message = 'Pour un ajout multiple il faut que le nombre d\'entrée pour le nom soit égale au nombre d\'entrée pour le numéro.';
+        this.toggleValidation(false, message);
         return;
       }
-      let promises = [];
+      const promises = [];
       if (nameLength !== 0) {
         names.forEach((name, index) => {
-          let item = new Collectionnable({name: name, number: numbers[index]}, null);
+          const item = new Collectionnable({name: name, number: numbers[index]}, null);
           promises.push(this.appData.addToCollection(path, item));
         });
       } else {
         numbers.forEach((number) => {
-          let item = new Collectionnable({number: number}, null);
+          const item = new Collectionnable({number: number}, null);
           promises.push(this.appData.addToCollection(path, item));
         });
       }
 
-      Promise.all(promises).then(()=> {
+      Promise.all(promises).then(_ => {
         this.toggleValidation(true, `L'ensemble des éléments ont été ajouté à la collection.`);
         this.resetForm();
       });
@@ -163,7 +166,7 @@ export class AddItemComponent implements OnInit, AfterViewInit {
   private resetForm() {
     // Reset item and categoties
     this.newItem = new Collectionnable(null, null);
-    this.categoryPath = []
+    this.categoryPath = [];
     this.categoryContainer.clear();
     this.categoriesComponentRef = [];
     this.createNewCategoryBox(null);
